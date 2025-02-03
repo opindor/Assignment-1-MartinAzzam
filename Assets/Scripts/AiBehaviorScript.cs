@@ -105,9 +105,9 @@ public class PlaySceneManager : MonoBehaviour
         // Move character towards target
         seeker.transform.position = Vector3.MoveTowards(seeker.transform.position, target.transform.position, 5f * Time.deltaTime);
 
-        // Rotate character to face the target (2D rotation)
+        // Rotate character to face the target
         Vector3 direction = (target.transform.position - seeker.transform.position).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Calculate angle in degrees
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // swap to degrees
         seeker.transform.rotation = Quaternion.Euler(0, 0, angle); // Rotate around Z-axis
 
         // Stop if close to target
@@ -124,7 +124,7 @@ public class PlaySceneManager : MonoBehaviour
         Vector3 fleeDirection = (seeker.transform.position - obstacle.transform.position).normalized;
         seeker.transform.position += fleeDirection * 5f * Time.deltaTime;
 
-        // Rotate character to face away from the obstacle (2D rotation)
+        // Rotate character to face away from the obstacle 
         float angle = Mathf.Atan2(fleeDirection.y, fleeDirection.x) * Mathf.Rad2Deg;
         seeker.transform.rotation = Quaternion.Euler(0, 0, angle);
         obstacle.transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -144,42 +144,7 @@ public class PlaySceneManager : MonoBehaviour
             escapeSound.Play();
         }
     }
-    //void Flee()
-    //{
-    //    // Move character towards target
-    //    seeker.transform.position = Vector3.MoveTowards(seeker.transform.position, obstacle.transform.position, 5f * Time.deltaTime);
-
-    //    // Rotate character to face the target (2D rotation)
-    //    Vector3 direction = (seeker.transform.position - obstacle.transform.position).normalized;
-    //    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Calculate angle in degrees
-    //    seeker.transform.rotation = Quaternion.Euler(0, 0, angle); // Rotate around Z-axis
-
-    //    // Stop if close to target
-    //    if (Vector3.Distance(seeker.transform.position, target.transform.position) < 1.5f)
-    //    {
-    //        seeking = false;
-    //        collisionSound.Play();
-    //    }
-    //}
-    //void Flee()
-    //{
-    //    // Move character away from enemy
-    //    Vector3 direction = (seeker.transform.position - obstacle.transform.position).normalized;
-    //    seeker.transform.position += direction * 5f * Time.deltaTime;
-
-    //    // Rotate character to face away from the enemy (2D rotation)
-    //    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Calculate angle in degrees
-    //    seeker.transform.rotation = Quaternion.Euler(0, 0, angle); // Rotate around Z-axis
-
-    //    // Stop at screen edge
-    //    Vector3 viewportPos = Camera.main.WorldToViewportPoint(seeker.transform.position);
-    //    if (viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1)
-    //    {
-    //        fleeing = false;
-    //        collisionSound.Play();
-    //    }
-    //}
-
+   
     void Arrive()
     {
         float slowdownDistance = 4f;
@@ -193,12 +158,12 @@ public class PlaySceneManager : MonoBehaviour
         // Move character towards target
         seeker.transform.position = Vector3.MoveTowards(seeker.transform.position, target.transform.position, speed * Time.deltaTime);
 
-        // Rotate character to face the target (2D rotation)
+        // Rotate character to face the target
         Vector3 direction = (target.transform.position - seeker.transform.position).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Calculate angle in degrees
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // swap to degrees
         seeker.transform.rotation = Quaternion.Euler(0, 0, angle); // Rotate around Z-axis
 
-        // Stop if close to target
+      
         if (distance < 1.5f)
         {
             arriving = false;
@@ -210,10 +175,10 @@ public class PlaySceneManager : MonoBehaviour
     {
         float avoidanceDistance = 2f;
 
-        // Move character towards target
+       
         Vector3 direction = (target.transform.position - seeker.transform.position).normalized;
 
-        // Avoid enemy if too close
+
         if (Vector3.Distance(seeker.transform.position, obstacle.transform.position) < avoidanceDistance)
         {
             Vector3 avoidDirection = (seeker.transform.position - obstacle.transform.position).normalized;
@@ -223,11 +188,11 @@ public class PlaySceneManager : MonoBehaviour
 
         seeker.transform.position += direction * 5f * Time.deltaTime;
 
-        // Rotate character to face the movement direction (2D rotation)
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Calculate angle in degrees
-        seeker.transform.rotation = Quaternion.Euler(0, 0, angle); // Rotate around Z-axis
+       
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; 
+        seeker.transform.rotation = Quaternion.Euler(0, 0, angle); 
 
-        // Stop if close to target
+        
         if (Vector3.Distance(seeker.transform.position, target.transform.position) < 1.5f)
         {
             avoiding = false;
